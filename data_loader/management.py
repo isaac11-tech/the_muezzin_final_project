@@ -8,33 +8,41 @@ import datetime
 class Management:
 
     def __init__(self):
+        #creating Connection to kafka
         self.producer = Producer()
 
+
+    """""
+    A function that get path and returns metadata 
+    """""
     @staticmethod
-    def get_metadata(path:Path):
+    def get_metadata(path: Path):
         metadata = {
             "metadata": {
                 "name": path.name,
                 "size": path.stat().st_size,
                 "create_at": datetime.datetime.fromtimestamp(path.stat().st_ctime).isoformat(),
-                'absolute_path':path.absolute()
+                'absolute_path': str(path.absolute())
             }
         }
         return metadata
 
+
+    """""
+    A function that get path and return json with  a metadata
+    """""
     @staticmethod
-    def create_json(file_path, file_name):
-        path = Path(file_path)
-        audio_name = {
-            'audio_info': {
-                "file_path": file_path,
+    def create_json(file_path: Path):
 
-            }
-        }
-        audio_name = json.dumps(audio_name)
+        metadata = Management.get_metadata(file_path)
+        json_info = json.dumps(metadata)
 
-        return audio_name
+        return json_info
 
+
+    """""
+    A function that get json and send that to kafka
+    """""
     def send_to_kafka(self, data: json, topic):
         try:
             self.producer.send_data(data, topic)
