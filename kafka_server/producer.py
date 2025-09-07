@@ -1,10 +1,11 @@
-from kafka import KafkaProducer
 import json
+from kafka import KafkaProducer
+from config import KAFKA_HOST
 
 
 class Producer:
 
-    def __init__(self, host='localhost:9092'):#reaning on localhost fot testing
+    def __init__(self,host = KAFKA_HOST):#reaning on localhost fot testing
         # creating producer object
         self.producer = KafkaProducer(
             bootstrap_servers=[host],
