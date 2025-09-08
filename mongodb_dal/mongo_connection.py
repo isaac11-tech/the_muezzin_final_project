@@ -2,8 +2,6 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
-#pip install --upgrade pymongo very impotent !!!
-#mybey use with singleton?
 
 load_dotenv()
 
