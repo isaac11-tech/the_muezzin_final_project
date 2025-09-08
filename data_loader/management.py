@@ -1,8 +1,9 @@
 from kafka_server.producer import Producer
-from mutagen.wave import WAVE
 from pathlib import Path
+from logger import Logger
 import json
 import datetime
+
 
 
 class Management:
@@ -10,10 +11,11 @@ class Management:
     def __init__(self):
         #creating Connection to kafka
         self.producer = Producer()
+        self.logger = Logger.get_logger()
 
 
     """""
-    A function that get path and returns metadata 
+    A function that get path and return from the file metadata mapping 
     """""
     @staticmethod
     def get_metadata(path: Path):
@@ -29,7 +31,7 @@ class Management:
 
 
     """""
-    A function that get path and return json with  a metadata
+    A function that get path and return json with a metadata
     """""
     @staticmethod
     def create_json(file_path: Path):
@@ -47,4 +49,5 @@ class Management:
         try:
             self.producer.send_data(data, topic)
         except Exception as e:
-            print("Error sending message:", e)
+            self.logger.error("Error sending message:", e)
+
