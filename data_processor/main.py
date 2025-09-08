@@ -12,8 +12,7 @@ class Main:
         self.service = DataService()
 
     def ran(self):
-        json_data = None
-
+       
         for message in self.consumer.consumer:
             try:
                 json_data = json.loads(message.value)
@@ -21,9 +20,12 @@ class Main:
                 json_data = self.service.add_unique_id(json_data)
                 print(f"Adding unique id to JSON : {json_data}")
                 # send the metadata to elastic
-                self.service.send_metadata_to_elasticsearch(INDEX_NAME,json_data['unique_id'],json_data)
-                # send the file and the id to mongo db
-                # self.service.send_file_to_mongodb()
+                unique_id = json_data['unique_id']
+                print(json_data['metadata']['absolute_path'])
+                self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
+                #send the file and the id to mongo db
+                file = self.service.get_file_by_path(json_data['metadata']['absolute_path'])
+                self.service.send_file_to_mongodb(file,unique_id)
 
             except json.JSONDecodeError:
                 print(f"Received non-JSON message: {message.value}")
