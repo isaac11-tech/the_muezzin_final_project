@@ -31,6 +31,8 @@ class Main:
                 self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
                 #send the file and the id to mongo db
                 file = self.service.get_file_by_path(json_data['metadata']['absolute_path'])
+                #for level tree
+                #file = self.service.audio_to_txt(file)
                 self.service.send_file_to_mongodb(file,unique_id)
 
             except json.JSONDecodeError:
