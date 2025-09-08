@@ -22,7 +22,8 @@ class Main:
 
 
 if __name__ == "__main__":
-    pass
+    m = Main()
+    m.ran()
 
 
 

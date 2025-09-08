@@ -9,8 +9,7 @@ class DataService:
     """""
     @staticmethod
     def add_unique_id(data: json):
-        for file in data:
-            file['unique_id'] = str(uuid.uuid4())
+        data['unique_id'] = str(uuid.uuid4())
         return data
 
 
