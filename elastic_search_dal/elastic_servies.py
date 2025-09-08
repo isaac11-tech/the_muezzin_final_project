@@ -1,0 +1,22 @@
+from elasticsearch import Elasticsearch
+
+
+class ElasticService:
+
+
+    def __init__(self, es_host, index_name):
+        self.es_host = es_host
+        self.es = Elasticsearch(self.es_host)
+        self.index_name = index_name
+
+
+
+    def insert_document(self,index,_id,body):
+        try:
+          response = self.es.index(index=index,id=_id,body=body)#meby beady
+          return response
+        except Exception as e:
+            print("Error to send to elasticsearch, messages:", e)
+
+
+
