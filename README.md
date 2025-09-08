@@ -29,6 +29,3 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB
 
 
 
-
-  "relevant_timestamp": "25/03/2020"
-}
