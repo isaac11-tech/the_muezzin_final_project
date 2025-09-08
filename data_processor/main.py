@@ -1,6 +1,6 @@
 import json
 from kafka_server.consumer import Consumer
-from config import KAFKA_HOST, TOPIC_NAME
+from config import KAFKA_HOST, TOPIC_NAME,INDEX_NAME
 from data_service import DataService
 
 
@@ -21,7 +21,7 @@ class Main:
                 json_data = self.service.add_unique_id(json_data)
                 print(f"Adding unique id to JSON : {json_data}")
                 # send the metadata to elastic
-                # self.service.send_metadata_to_elasticsearch()
+                self.service.send_metadata_to_elasticsearch(INDEX_NAME,json_data['unique_id'],json_data)
                 # send the file and the id to mongo db
                 # self.service.send_file_to_mongodb()
 

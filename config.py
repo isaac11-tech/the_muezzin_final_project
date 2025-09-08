@@ -12,5 +12,5 @@ KAFKA_HOST = 'localhost:9092'
 """""
 elasticSearch service
 """""
-ES_URL = None
-INDEX_NAME =None
+ES_URL = 'http://localhost:9200'
+INDEX_NAME ="audio_fils_metadata"
