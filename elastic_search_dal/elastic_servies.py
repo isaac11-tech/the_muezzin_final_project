@@ -1,4 +1,5 @@
 from elasticsearch import Elasticsearch
+from logger import Logger
 
 
 class ElasticService:
@@ -8,7 +9,7 @@ class ElasticService:
         self.es_host = es_host
         self.es = Elasticsearch(self.es_host)
         self.index_name = index_name
-
+        self.logger = Logger.get_logger()
 
 
     def insert_document(self,index,_id,body):
@@ -16,7 +17,7 @@ class ElasticService:
           response = self.es.index(index=index,id=_id,body=body)
           return response
         except Exception as e:
-            print("Error to send to elasticsearch, messages:", e)
+            self.logger.error("Error to send to elasticsearch, messages:", e)
 
 
 
