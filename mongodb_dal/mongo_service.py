@@ -1,5 +1,5 @@
 from pymongo.errors import PyMongoError
-from mongo_connection import ConnectionDB
+from mongodb_dal.mongo_connection import ConnectionDB
 
 
 class MongoService:
@@ -11,6 +11,6 @@ class MongoService:
     def insert_one(self, data):
         try:
             result = self.conn.collection.insert_one(data)
-            return str(result.inserted_id)
+            return str(result)
         except PyMongoError as e:
             raise RuntimeError(f"Insert failed: {e}")

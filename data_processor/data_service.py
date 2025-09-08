@@ -50,4 +50,5 @@ class DataService:
     """""
     def send_file_to_mongodb(self,file,unique_id):#need to add try !!!
         data = {unique_id:file}
-        self.mongo_conn.insert_one(data)
+        result = self.mongo_conn.insert_one(data)
+        print(result)
