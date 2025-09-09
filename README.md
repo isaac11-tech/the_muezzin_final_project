@@ -12,7 +12,7 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB
 
 ### 1.data_loader :
 - A loop that goes through all files and opens them.
-- for evary file take (with Path object) the metadata from the file.
+- for evary file take (with Pathlib) the metadata from the file.
 - convert it to json
 - Publishes them to Kafka.
 - the maping looks like that:
@@ -26,6 +26,16 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB
         }
 
 ---
+### 2.data_processor :
+-A loop that runs all the time and listens to the consumer
+  -Every file you receive runs a process on it:
+    -Adds a unique id to the metadata
+    -Transcribes audio to text and adds to the metadata
+    -send the metadata to elasticsearch
+    -by the path of the file send to mongodb uniqueid + file
+
+
+   
 
 
 
