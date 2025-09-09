@@ -18,7 +18,7 @@ class Producer:
         try:
             self.producer.send(topic, data)
             self.producer.flush()
-            self.logger.info("Message sent:", data)
+            self.logger.info(f"Message sent:{data}")
         except Exception as e:
             self.logger.error("Error sending message:", e)
 
