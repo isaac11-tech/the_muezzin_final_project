@@ -1,10 +1,9 @@
 # the_muezzin_final_project
 
 ## Introduction:
-Hi! this is my final project . In this project, I handle audio files, process them, make a pipeline, and save them in MongoDB. The file itself is processed with the audio processed in Elasticsearch, the information about the processed file, and everything goes through kafka server 
-
+Hi! this is my final project . In this project, I handle audio files, process them,Analyze them, make a pipeline, and save the file in MongoDB.the metadata about the file, including classification and hazard analysis, will be stored in Elasticsearch.
 Think of it as:  
-file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB
+file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
 ---
 
@@ -33,6 +32,15 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB
     - Transcribes audio to text and adds to the metadata
     - send the metadata to elasticsearch
     - by the path of the file send to mongodb uniqueid + file
+      
+---
+### 3.data_analyzer :
+
+
+
+
+   
+   
 
 
    
