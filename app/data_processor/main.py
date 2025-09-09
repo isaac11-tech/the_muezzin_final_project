@@ -1,9 +1,9 @@
 import json
 import os
-from kafka_server.consumer import Consumer
-from config import TOPIC_NAME,INDEX_NAME
+from src.kafka_server.consumer import Consumer
+from utils.config import TOPIC_NAME,INDEX_NAME
 from data_service import DataService
-from logger import Logger
+from utils.logger import Logger
 from dotenv import load_dotenv
 
 load_dotenv()

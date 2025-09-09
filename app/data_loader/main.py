@@ -1,7 +1,7 @@
 from management import Management
 from pathlib import Path
-from config import FILE_PATH,TOPIC_NAME
-from logger import Logger
+from utils.config import FILE_PATH,TOPIC_NAME
+from utils.logger import Logger
 
 
 

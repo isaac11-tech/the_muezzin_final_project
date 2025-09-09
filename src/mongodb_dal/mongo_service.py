@@ -1,5 +1,5 @@
 from pymongo.errors import PyMongoError
-from mongodb_dal.mongo_connection import ConnectionDB
+from src.mongodb_dal.mongo_connection import ConnectionDB
 
 
 class MongoService:

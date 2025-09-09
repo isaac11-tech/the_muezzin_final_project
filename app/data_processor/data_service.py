@@ -2,11 +2,11 @@ import uuid
 import json
 import os
 import speech_recognition as sr
-from config import INDEX_NAME
-from elastic_search_dal.elastic_servies import ElasticService
-from mongodb_dal.mongo_service import MongoService
-from config import DB_NAME, COLLECTION_NAME
-from logger import Logger
+from utils.config import INDEX_NAME
+from src.elastic_search_dal.elastic_servies import ElasticService
+from src.mongodb_dal.mongo_service import MongoService
+from utils.config import DB_NAME, COLLECTION_NAME
+from utils.logger import Logger
 from dotenv import load_dotenv
 
 load_dotenv()

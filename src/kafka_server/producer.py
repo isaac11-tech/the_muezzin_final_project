@@ -1,15 +1,16 @@
 import json
 from kafka import KafkaProducer
-from logger import Logger
+from utils.logger import Logger
 
 class Producer:
 
-    def __init__(self,host):#reaning on localhost fot testing
+    def __init__(self,host):
         # creating producer object
         self.producer = KafkaProducer(
             bootstrap_servers=[host],
             value_serializer=lambda v: json.dumps(v).encode('utf-8')
         )
+
         self.logger = Logger.get_logger()
 
 
