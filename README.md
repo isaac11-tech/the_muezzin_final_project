@@ -10,10 +10,11 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
 ## What We Built
 
 ### 1.data_loader :
-
+- A loop that goes through all files and opens them.
+- for evary file take (with Pathlib) the metadata from the file.
 - convert it to json
 - Publishes them to Kafka.
-- the mapping looks like that:
+- the maping looks like that:
    metadata = {
             "metadata": {
                 "name": path.name,
