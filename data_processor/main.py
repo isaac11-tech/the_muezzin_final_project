@@ -26,13 +26,15 @@ class Main:
                 self.logger.info(f"Received JSON message: {json_data}")
                 json_data = self.service.add_unique_id(json_data)
                 self.logger.info(f"Adding unique id to JSON : {json_data}")
+                file_path = json_data['metadata']['absolute_path']
+                transcribed_audio = self.service.audio_to_txt(file_path)
+                json_data = self.service.add_transcribed_audio(json_data,transcribed_audio)
                 # send the metadata to elastic
                 unique_id = json_data['unique_id']
+                # json_data = add txt file
                 self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
                 #send the file and the id to mongo db
-                file = self.service.get_file_by_path(json_data['metadata']['absolute_path'])
-                #for level tree
-                #file = self.service.audio_to_txt(file)
+                file = self.service.get_file_by_path(file_path)
                 self.service.send_file_to_mongodb(file,unique_id)
 
             except json.JSONDecodeError:
