@@ -1,8 +1,7 @@
 import json
 import datetime
-import os
-from src.kafka_server.producer import Producer
 from pathlib import Path
+from app.instance_kafka import KafkaServerProducer
 from utils.logger import Logger
 from dotenv import load_dotenv
 
@@ -12,9 +11,9 @@ load_dotenv()
 
 class Management:
 
-    def __init__(self):
+    def __init__(self,kafka_producer: KafkaServerProducer):
         #creating Connection to kafka
-        self.producer = Producer(os.getenv('KAFKA_HOST'))
+        self.producer = kafka_producer.producer
         self.logger = Logger.get_logger()
 
 

@@ -20,4 +20,28 @@ class ElasticService:
             self.logger.error("Error to send to elasticsearch, messages:", e)
 
 
+    def get_document_by_match(self,index_name, field_name,field_value):
+        try:
+            query = {
+                "query": {
+                    "match": {
+                        field_name: field_value
+                    }
+                }
+            }
+            response = self.es.search(index=index_name, body=query)
+
+            hits = response["hits"]["hits"]
+            if hits:
+                return hits[0]["_source"]
+            else:
+                return None
+        except Exception as e:
+            print(f"Error searching document: {e}")
+            return None
+
+    def update_doc(self, doc_id, body):
+        return self.es.update(index=self.index_name, id=doc_id, body=body)
+
+
 
