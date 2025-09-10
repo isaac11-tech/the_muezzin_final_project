@@ -20,7 +20,7 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
 │   ├── negative_words
 │   └── neutral_words
 ├── docker-compose.yml
-├── requirements.txt
+├── requirements.txt.txt
 ├── src
 │   ├── __init__.py
 │   ├── __pycache__

@@ -14,7 +14,7 @@ services:
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     networks:
-      - elastic
+      - app_network
 
   kibana:
     image: kibana:8.15.5
@@ -24,13 +24,78 @@ services:
     ports:
       - "5601:5601"
     networks:
-      - elastic
+      - app_network
     depends_on: #trun on only when elasticsearch on
       - elasticsearch
+
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb_audio_fils
+    environment:
+      - CONN_STRING=mongodb://localhost:27017/
+    ports:
+      - "27017:27017"
+    networks:
+      - app_network
+    depends_on: #trun on only when elasticsearch on
+      - elasticsearch
+
+  kafka:
+    image: bitnami/kafka:3.5
+    container_name: mongodb_audio_fils
+    environment:
+      - KAFKA_HOST=localhost:9092
+    ports:
+      - "9092:9092"
+    networks:
+      - app_network
+
+  data_analyzer:
+    build:
+      context: /app/data_analyzer/Dockerfile
+      dockerfile: Dockerfile
+    container_name: data_analyzer
+    restart: unless-stopped
+    depends_on:
+      - kafka
+      - elasticsearch
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  data_loader:
+    build:
+      context: /app/data_loader/Dockerfile
+      dockerfile: Dockerfile
+    container_name: data_loader
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "7070:7070"
+    networks:
+      - app_network
+
+  data_processor:
+    build:
+      context: app/data_processor/Dockerfile
+      dockerfile: Dockerfile
+    container_name: data_processor
+    restart: unless-stopped
+    depends_on:
+      - kafka
+      - elasticsearch
+      - mongodb
+    ports:
+      - "6070:6070"
+    networks:
+      - app_network
+
 
 volumes:
   elasticsearch-data:
 
 networks:
-  elastic:
+  app_network:
     driver: bridge

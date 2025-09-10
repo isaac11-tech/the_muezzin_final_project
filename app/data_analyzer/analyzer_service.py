@@ -27,7 +27,6 @@ class AnalyzerService:
         self.logger.info(f"Decoded string: {sample_string}")
         return sample_string
 
-
     def txt_file_to_list(self, file_path):
         """""
         A function that get file path ,open it,decoder and return as a list of words
@@ -83,8 +82,9 @@ class AnalyzerService:
         """""
         if score < 3:
             level_danger = 'None'
-        if score >= 3 & score < 7:
+        elif  3 >= score < 7:
             level_danger = 'medium'
         else:
             level_danger = 'high'
+
         return level_danger
