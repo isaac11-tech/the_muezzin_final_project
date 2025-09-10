@@ -16,3 +16,9 @@ mongodb
 """""
 DB_NAME = 'muezzin'
 COLLECTION_NAME = 'audio_fils'
+
+"""""
+black_list
+"""""
+NEGATIVE_WORDS_PATH = "C:/Users/itzch/the_muezzin_final_project/data/negative_words"
+NEUTRAL_WORDS_PATH = "C:/Users/itzch/the_muezzin_final_project/data/neutral_words"

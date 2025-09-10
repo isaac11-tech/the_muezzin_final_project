@@ -1,19 +1,20 @@
 import json
-from app.instance_kafka import  KafkaServer
+from app.instance_kafka import  KafkaServerProducer,KafkaServerConsumer
 from utils.config import TOPIC_NAME,INDEX_NAME,UNIQUE_ID
 from app.data_processor.processor_service import DataService
 from utils.logger import Logger
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
 
 class DataProcessorMain:
 
-    def __init__(self,kafka_server: KafkaServer):
+    def __init__(self,kafka_consumer:KafkaServerConsumer,kafka_producer:KafkaServerProducer):
         # create a connection to the consumer.
-        self.consumer = kafka_server.consumer
-        self.producer = kafka_server.producer
+        self.consumer = KafkaServerConsumer(TOPIC_NAME)
+        self.producer = KafkaServerProducer()
         self.service = DataService()
         self.logger = Logger.get_logger()
 
@@ -32,7 +33,7 @@ class DataProcessorMain:
                 # send the metadata to elastic
                 unique_id = json_data['unique_id']
                 #send to queue in kafka For retrieval from Elasticsearch for data analysis
-                self.producer.send_data(unique_id,UNIQUE_ID)
+                self.producer.producer.send_data(unique_id,UNIQUE_ID)
                 self.logger.info("send the unique_id to kafka")
                 # json_data = add txt file
                 self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
@@ -45,5 +46,6 @@ class DataProcessorMain:
 
         # when ending to send all the data close the consumer (not use yet)
         self.consumer.consumer.close()
+
 
 

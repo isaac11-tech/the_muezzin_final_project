@@ -1,15 +1,15 @@
 from pathlib import Path
 from utils.config import FILE_PATH,TOPIC_NAME
 from utils.logger import Logger
-from app.instance_kafka import  KafkaServer
+from app.instance_kafka import  KafkaServerProducer
 from app.data_loader.management import Management
 
 
 
 class DataLoaderMain:
 
-    def __init__(self,kafka_server: KafkaServer):
-        self. manager = Management(kafka_server)
+    def __init__(self,kafka_producer: KafkaServerProducer):
+        self. manager = Management(kafka_producer)
         self.logger = Logger.get_logger()
 
     def ran(self):

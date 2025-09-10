@@ -1,0 +1,10 @@
+import base64
+
+base64_string = "R2Vub2NpZGUsV2FyIENyaW1lcyxBcGFydGhlaWQsTWFzc2FjcmUsTmFrYmEsRGlzcGxhY2VtZW50LEh1bWFuaXRhcmlhbiBDcmlzaXMsQmxvY2thZGUsT2NjdXBhdGlvbixSZWZ1Z2VlcyxJQ0MsQkRT"
+
+
+
+
+print(txt_file_to_list("C:/Users/itzch/the_muezzin_final_project/data/negative_words"))
+
+
