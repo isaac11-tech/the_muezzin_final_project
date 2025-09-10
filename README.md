@@ -8,8 +8,11 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
 ├── README.md
 
 ├── __pycache__
+
 ├── app
+
 │   ├── __pycache__
+
 │   ├── data_analyzer
 │   ├── data_loader
 │   ├── data_processor
