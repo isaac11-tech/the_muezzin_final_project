@@ -17,11 +17,13 @@ class Management:
         self.logger = Logger.get_logger()
 
 
-    """""
-    A function that get path and return from the file metadata mapping 
-    """""
+
     @staticmethod
     def get_metadata(path: Path):
+        """""
+        A function that get path and return from the file metadata mapping 
+        """""
+
         metadata = {
             "metadata": {
                 "name": path.name,
@@ -33,22 +35,22 @@ class Management:
         return metadata
 
 
-    """""
-    A function that get path and return json with a metadata
-    """""
+
     @staticmethod
     def create_json(file_path: Path):
-
+        """""
+        A function that get path and return json with a metadata
+        """""
         metadata = Management.get_metadata(file_path)
         json_info = json.dumps(metadata)
-
         return json_info
 
 
-    """""
-    A function that get json and send that to kafka
-    """""
+
     def send_to_kafka(self, data: json, topic):
+        """""
+        A function that get json and send that to kafka
+        """""
         try:
             self.producer.send_data(data, topic)
         except Exception as e:

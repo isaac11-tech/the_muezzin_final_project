@@ -1,15 +1,6 @@
-import json
-import os
-from logging import setLogRecordFactory
-
 from app.instance_kafka import KafkaServerConsumer
 from utils.logger import Logger
-from dotenv import load_dotenv
-from analyzer_service import AnalyzerService
-from utils.config import INDEX_NAME
-from src.elastic_search_dal.elastic_servies import ElasticService
-
-load_dotenv()
+from app.data_analyzer.analyzer_service import AnalyzerService
 
 
 class AnalyzerMain:
@@ -43,8 +34,3 @@ class AnalyzerMain:
                 self.logger.error(f"can't connect to kafka ",e)
 
 
-
-
-
-#result
-# {'metadata': {'name': 'download (12).wav', 'size': 1430970, 'create_at': '1979-12-31T23:00:00', 'absolute_path': 'C:\\podcasts\\download (12).wav'}, 'unique_id': '44f8088f-4175-4f1c-b951-faa9d134aa81'}

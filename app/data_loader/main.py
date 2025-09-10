@@ -12,7 +12,7 @@ class DataLoaderMain:
         self. manager = Management(kafka_producer)
         self.logger = Logger.get_logger()
 
-    def ran(self):
+    def run(self):
         path = Path(FILE_PATH)
         # loop that send all the files to kafka
         for file in path.iterdir():
