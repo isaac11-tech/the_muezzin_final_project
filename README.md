@@ -6,6 +6,7 @@ Think of it as:
 file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
 ├── README.md
+
 ├── __pycache__
 ├── app
 │   ├── __pycache__
