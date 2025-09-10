@@ -1,8 +1,9 @@
 """""
-audio service
+audio service/by kafka
 """""
 FILE_PATH = "C:/podcasts"
 TOPIC_NAME = "audio_metadata"
+UNIQUE_ID = 'unique_id'
 
 """""
 elasticSearch service

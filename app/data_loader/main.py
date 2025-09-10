@@ -1,14 +1,15 @@
-from management import Management
 from pathlib import Path
 from utils.config import FILE_PATH,TOPIC_NAME
 from utils.logger import Logger
+from app.instance_kafka import  KafkaServer
+from app.data_loader.management import Management
 
 
 
-class Main:
+class DataLoaderMain:
 
-    def __init__(self):
-        self. manager = Management()
+    def __init__(self,kafka_server: KafkaServer):
+        self. manager = Management(kafka_server)
         self.logger = Logger.get_logger()
 
     def ran(self):
@@ -22,11 +23,6 @@ class Main:
 
         # after the loop finish send all the data close the producer
         self.manager.producer.close_producer()
-
-#raning the main
-if __name__ == "__main__":
-    m = Main()
-    m.ran()
 
 
 

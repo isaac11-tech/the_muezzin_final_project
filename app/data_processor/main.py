@@ -1,19 +1,19 @@
 import json
-import os
-from src.kafka_server.consumer import Consumer
-from utils.config import TOPIC_NAME,INDEX_NAME
-from processor_service import DataService
+from app.instance_kafka import  KafkaServer
+from utils.config import TOPIC_NAME,INDEX_NAME,UNIQUE_ID
+from app.data_processor.processor_service import DataService
 from utils.logger import Logger
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-class Main:
+class DataProcessorMain:
 
-    def __init__(self):
+    def __init__(self,kafka_server: KafkaServer):
         # create a connection to the consumer.
-        self.consumer = Consumer(TOPIC_NAME,os.getenv('KAFKA_HOST'))
+        self.consumer = kafka_server.consumer
+        self.producer = kafka_server.producer
         self.service = DataService()
         self.logger = Logger.get_logger()
 
@@ -31,6 +31,9 @@ class Main:
                 json_data = self.service.add_transcribed_audio(json_data,transcribed_audio)
                 # send the metadata to elastic
                 unique_id = json_data['unique_id']
+                #send to queue in kafka For retrieval from Elasticsearch for data analysis
+                self.producer.send_data(unique_id,UNIQUE_ID)
+                self.logger.info("send the unique_id to kafka")
                 # json_data = add txt file
                 self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
                 #send the file and the id to mongo db
@@ -44,6 +47,3 @@ class Main:
         self.consumer.consumer.close()
 
 
-if __name__ == "__main__":
-    m = Main()
-    m.ran()
