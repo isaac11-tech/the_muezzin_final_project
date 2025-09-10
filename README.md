@@ -5,14 +5,13 @@ Hi! this is my final project . In this project, I handle audio files, process th
 Think of it as:  
 file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
+'''
+bash
+
 ├── README.md
-
 ├── __pycache__
-
 ├── app
-
 │   ├── __pycache__
-
 │   ├── data_analyzer
 │   ├── data_loader
 │   ├── data_processor
@@ -34,6 +33,7 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
     ├── __pycache__
     ├── config.py
     └── logger.py
+'''
 
 ---
 
