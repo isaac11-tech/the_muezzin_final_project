@@ -5,6 +5,8 @@ Hi! this is my final project . In this project, I handle audio files, process th
 Think of it as:  
 file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
+## Build:
+
 ```bash
 
 ├── README.md
@@ -76,6 +78,15 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
 - Elasticsearch dal with connection to service
 - kafka that have basic producer and consumer
 - mongo dal for connection and CRUD
+
+---
+### 5.Project structure :
+I built the project in a structure of three services, mainly logically separated, that use the external src that I built.
+The idea was to simulate a real data flow and divide it into three separate services, which also made it easier to divide it into containers and 
+run the program in K8S .... I didn't finish building everything I wanted and there are still some points for improvement.
+
+
+
 
 
 
