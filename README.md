@@ -5,7 +5,7 @@ Hi! this is my final project . In this project, I handle audio files, process th
 Think of it as:  
 file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
-'''bash
+```bash
 
 ├── README.md
 ├── __pycache__
@@ -32,7 +32,7 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
     ├── __pycache__
     ├── config.py
     └── logger.py
-'''
+```
 
 ---
 
