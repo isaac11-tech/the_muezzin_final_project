@@ -13,13 +13,13 @@ class DataProcessorMain:
 
     def __init__(self,kafka_consumer:KafkaServerConsumer,kafka_producer:KafkaServerProducer):
         # create a connection to the consumer.
-        self.consumer = KafkaServerConsumer(TOPIC_NAME)
-        self.producer = KafkaServerProducer()
+        self.consumer = kafka_consumer.consumer
+        self.producer = kafka_producer.producer
         self.service = DataService()
         self.logger = Logger.get_logger()
 
 
-    def ran(self):
+    def run(self):
        
         for message in self.consumer.consumer:
             try:
@@ -33,7 +33,7 @@ class DataProcessorMain:
                 # send the metadata to elastic
                 unique_id = json_data['unique_id']
                 #send to queue in kafka For retrieval from Elasticsearch for data analysis
-                self.producer.producer.send_data(unique_id,UNIQUE_ID)
+                self.producer.send_data(unique_id,UNIQUE_ID)
                 self.logger.info("send the unique_id to kafka")
                 # json_data = add txt file
                 self.service.send_metadata_to_elasticsearch(INDEX_NAME,unique_id,json_data)
