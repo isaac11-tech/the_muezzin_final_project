@@ -5,16 +5,42 @@ Hi! this is my final project . In this project, I handle audio files, process th
 Think of it as:  
 file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analysis → Elasticsearch
 
+├── README.md
+├── __pycache__
+├── app
+│   ├── __pycache__
+│   ├── data_analyzer
+│   ├── data_loader
+│   ├── data_processor
+│   ├── instance_kafka.py
+│   └── main.py
+├── data
+│   ├── negative_words
+│   └── neutral_words
+├── docker-compose.yml
+├── requirements.txt
+├── src
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── elastic_search_dal
+│   ├── kafka_server
+│   └── mongodb_dal
+└── utils
+    ├── __init__.py
+    ├── __pycache__
+    ├── config.py
+    └── logger.py
+
 ---
 
 ## What We Built
 
 ### 1.data_loader :
 - A loop that goes through all files and opens them.
-- for evary file take (with Pathlib) the metadata from the file.
+- for every file take (with Pathlib) the metadata from the file.
 - convert it to json
 - Publishes them to Kafka.
-- the maping looks like that:
+- the mapping looks like that:
    metadata = {
             "metadata": {
                 "name": path.name,
@@ -35,12 +61,23 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
       
 ---
 ### 3.data_analyzer :
+-A loop that runs all the time and listens to the consumer
+-According to the ID that KAFKA receives, it pulls the metadata from Elasticsearch.
+-pull the 'transcribes_txt' from the metadata
+-Classifies the danger by the amount of dangerous words by logic of (count of dangers word/ len_txt) * 10
+-update the new data in Elasticsearch
+
+---
+### 4.src :
+-I built a small library that holds all the basic structure of our serves
+- Elasticsearch dal with connection to service
+- kafka that have basic producer and consumer
+- mongo dal for connection and CRUD
 
 
 
 
-   
-   
+
 
 
    
