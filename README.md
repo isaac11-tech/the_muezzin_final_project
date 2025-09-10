@@ -43,9 +43,6 @@ file(.wav) → Kafka → process → Save → Elasticsearch & mongoDB → Analys
    
 
 
-   
-
-
 
 
 
